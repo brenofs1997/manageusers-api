@@ -17,21 +17,16 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "adress")
 public class AdressModel {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(generator = "UUID")
-	@GenericGenerator(
-	        name = "UUID",
-	        strategy = "org.hibernate.id.UUIDGenerator"
-	)
-	@Column(name = "ID", updatable = false, nullable = false)
-	@ColumnDefault("random_uuid()")
-	@Type(type = "uuid-char")
-	private UUID id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
 	@Column(nullable = false, length = 50)
 	private String publicPlace;
@@ -44,20 +39,19 @@ public class AdressModel {
 
 	@Column(nullable = false, length = 50)
 	private String city;
-	
+
 	@Column(nullable = false)
 	private Boolean principal;
 
-	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private UserModel userModel;
 
-	public UUID getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(UUID id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -73,8 +67,8 @@ public class AdressModel {
 		return CEP;
 	}
 
-	public void setCEP(String cEP) {
-		CEP = cEP;
+	public void setCEP(String CEP) {
+		this.CEP = CEP;
 	}
 
 	public String getNumber() {
@@ -100,7 +94,7 @@ public class AdressModel {
 	public void setPrincipal(Boolean principal) {
 		this.principal = principal;
 	}
-	
+
 	public UserModel getUserModel() {
 		return userModel;
 	}
@@ -108,6 +102,5 @@ public class AdressModel {
 	public void setUserModel(UserModel userModel) {
 		this.userModel = userModel;
 	}
-	
-	
+
 }

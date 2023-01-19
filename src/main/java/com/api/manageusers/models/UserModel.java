@@ -19,21 +19,17 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "users")
 public class UserModel implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(generator = "UUID")
-	@GenericGenerator(
-	        name = "UUID",
-	        strategy = "org.hibernate.id.UUIDGenerator"
-	)
-	@Column(name = "ID", updatable = false, nullable = false)
-	@ColumnDefault("random_uuid()")
-	@Type(type = "uuid-char")
-	private UUID id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
 	@Column(nullable = false, length = 50)
 	private String name;
@@ -41,14 +37,15 @@ public class UserModel implements Serializable {
 	@Column(nullable = false)
 	private LocalDate birthDate;
 
-	@OneToMany(mappedBy  = "userModel", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonIgnore
+	@OneToMany(mappedBy = "userModel", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<AdressModel> adress = new ArrayList<>();
 
-	public UUID getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(UUID id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -76,5 +73,4 @@ public class UserModel implements Serializable {
 		this.adress = adress;
 	}
 
-	
 }

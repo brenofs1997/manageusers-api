@@ -44,7 +44,7 @@ public class UserController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Object> updateCard(@PathVariable(value = "id") UUID id, @RequestBody @Valid UserDto userDto) {
+	public ResponseEntity<Object> updateCard(@PathVariable(value = "id") Long id, @RequestBody @Valid UserDto userDto) {
 		Optional<UserModel> userModelOptional = service.findById(id);
 		
 		if (!userModelOptional.isPresent()) {
@@ -65,7 +65,7 @@ public class UserController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Object> getByID(@PathVariable(value = "id") UUID id) {
+	public ResponseEntity<Object> getByID(@PathVariable(value = "id") Long id) {
 		Optional<UserModel> userModelOptional = service.findById(id);
 
 		if (!userModelOptional.isPresent()) {

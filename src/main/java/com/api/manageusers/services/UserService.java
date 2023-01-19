@@ -30,7 +30,7 @@ public class UserService {
         return userRepository.findAll(pageable);
     }
 
-    public Optional<UserModel> findById(UUID id) {
+    public Optional<UserModel> findById(Long id) {
         return userRepository.findById(id);
     }
 
