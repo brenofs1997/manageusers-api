@@ -44,7 +44,7 @@ public class AdressController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(service.save(adressModel));
 	}
 
-	@PutMapping
+	@PutMapping("/{id}")
 	public ResponseEntity<Object> updateAdress(@PathVariable(value = "id") Long id,@RequestBody @Valid AdressDto adressDto) {
 		Optional<AdressModel> adressModelOptional = service.findById(id);
 

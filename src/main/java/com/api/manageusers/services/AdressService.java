@@ -38,8 +38,10 @@ public class AdressService {
 	}
 
 	@Transactional
-	public void updateAllById(Long id) {
+	public boolean updateAllById(Long id) {
 		adressRepository.updateAllById(id);
+		
+		return true;
 	}
 
 }
